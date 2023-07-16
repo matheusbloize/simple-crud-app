@@ -3,14 +3,16 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = require('./routes/productRoute');
 const errorMiddleware = require('./middleware/errorMiddleware');
+const cors = require('cors');
 
 const app = express();
 
 const MONGODB_URL = process.env.MONGODB_URL;
 const PORT = process.env.PORT;
 
+app.use(cors());
+
 app.use(express.json());
-app.use(express.urlencoded({extended: false}))
 
 app.use('/api/products', router);
 
