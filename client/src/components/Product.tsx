@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from 'react-query';
 import { api } from '../api/api';
 import { MouseEvent, useRef, useState } from 'react';
 import Modal from './Modal';
+import { toast } from 'react-toastify';
 
 interface Props {
   product: ProductInterface;
@@ -25,7 +26,7 @@ const Product = ({ product }: Props) => {
     setUpdatedProductQuantity(product.quantity);
     setUpdatedProductImage(product.image);
   };
-  
+
   const closeModal = () => {
     modalRef.current!.style.display = 'none';
     setUpdatedProductName('');
@@ -38,14 +39,10 @@ const Product = ({ product }: Props) => {
 
   const checkAction = async (e: MouseEvent) => {
     if ((e.target as HTMLButtonElement).getAttribute('button-attribute') === 'delete') {
-      void (await api.deleteProduct(product._id!)),
-        {
-          onSuccess: () => {
-            void queryClient.invalidateQueries('products');
-          },
-        };
+      void (await api.deleteProduct(product._id!));
+      toast.error('Product removed!');
     } else {
-      openModal()
+      openModal();
     }
     void queryClient.invalidateQueries('products');
   };
@@ -70,16 +67,16 @@ const Product = ({ product }: Props) => {
         setProductImage={setUpdatedProductImage}
         id={product._id}
       />
-      <div className='bg-[#f2f2f2] border-solid border-[#333] border-[1px] rounded-lg  max-w-full min-h-[15em] p-4 flex flex-col items-center justify-center m-4 cursor-pointer'>
+      <div className='bg-[#f2f2f2] border-solid border-[#333] border-[1px] rounded-lg  max-w-full min-h-[15em] p-4 flex flex-col items-center justify-center m-4 cursor-pointer overflow-hidden'>
         {product.image ? (
           <img
-            className='w-[50vw] h-[25vh] md:w-[25vw] 2xl:w-[12vw]'
+            className='w-[50vw] h-[25vh] md:w-[25vw] 2xl:w-[12vw] border-solid border-[#fff] border-[5px] rounded-md'
             src={product.image}
             alt={product.name}
           />
         ) : (
           <img
-            className='w-[50vw] h-[25vh] md:w-[25vw] 2xl:w-[12vw]'
+            className='w-[50vw] h-[25vh] md:w-[25vw] 2xl:w-[12vw] border-solid border-[#fff] border-[5px] rounded-md'
             src={defaultImage}
             alt={product.name}
           />

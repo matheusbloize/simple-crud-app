@@ -1,6 +1,7 @@
 import { MouseEvent, LegacyRef } from 'react';
 import { useMutation, useQueryClient } from 'react-query';
 import { api } from '../api/api';
+import { toast } from 'react-toastify';
 
 interface Props {
   modalRef: LegacyRef<HTMLDivElement> | undefined;
@@ -32,7 +33,7 @@ const Modal = ({
   setProductPrice,
   setProductQuantity,
   setProductImage,
-  id
+  id,
 }: Props) => {
   const queryClient = useQueryClient();
 
@@ -54,6 +55,7 @@ const Modal = ({
     {
       onSuccess: () => {
         void queryClient.invalidateQueries('products');
+        button === 'create' ? toast.success('Product created!') : toast.info('Product updated!');
         closeModal();
       },
     }
