@@ -4,7 +4,7 @@ import { api } from '../api/api';
 
 interface Props {
   modalRef: LegacyRef<HTMLDivElement> | undefined;
-  openModal: () => void;
+  openModal: (type: string) => void;
   closeModal: () => void;
   title: string;
   button: string;
@@ -16,6 +16,7 @@ interface Props {
   setProductPrice: React.Dispatch<React.SetStateAction<number | undefined>>;
   setProductQuantity: React.Dispatch<React.SetStateAction<number | undefined>>;
   setProductImage: React.Dispatch<React.SetStateAction<string | undefined>>;
+  id?: string;
 }
 
 const Modal = ({
@@ -31,17 +32,25 @@ const Modal = ({
   setProductPrice,
   setProductQuantity,
   setProductImage,
+  id
 }: Props) => {
   const queryClient = useQueryClient();
 
   const { mutate } = useMutation(
     () =>
-      api.createProduct({
-        name: productName || '',
-        price: productPrice || 0,
-        quantity: productQuantity || 0,
-        image: productImage,
-      }),
+      button === 'create'
+        ? api.createProduct({
+            name: productName || '',
+            price: productPrice || 0,
+            quantity: productQuantity || 0,
+            image: productImage,
+          })
+        : api.updateProduct(id!, {
+            name: productName || '',
+            price: productPrice || 0,
+            quantity: productQuantity || 0,
+            image: productImage,
+          }),
     {
       onSuccess: () => {
         void queryClient.invalidateQueries('products');
