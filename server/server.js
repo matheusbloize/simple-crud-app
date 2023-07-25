@@ -9,8 +9,14 @@ const app = express();
 
 const MONGODB_URL = process.env.MONGODB_URL;
 const PORT = process.env.PORT;
+const FRONTEND = process.env.FRONTEND
 
-app.use(cors());
+const corsOptions = {
+  origin: FRONTEND,
+  optionsSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
 
