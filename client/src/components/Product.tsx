@@ -67,7 +67,7 @@ const Product = ({ product }: Props) => {
         setProductImage={setUpdatedProductImage}
         id={product._id}
       />
-      <div className='bg-[#f2f2f2] border-solid border-[#333] border-[1px] rounded-lg  max-w-full min-h-[15em] p-4 flex flex-col items-center justify-center m-4 cursor-pointer overflow-hidden'>
+      <div className='bg-[#f2f2f2] border-solid border-[#333] border-[1px] rounded-lg  max-w-full min-h-[15em] p-4 flex flex-col items-center justify-center m-4 cursor-pointer overflow-hidden md:w-[15em] 2xl:w-[85%]'>
         {product.image ? (
           <img
             className='w-[50vw] h-[25vh] md:w-[25vw] 2xl:w-[12vw] border-solid border-[#fff] border-[5px] rounded-md'
@@ -88,12 +88,12 @@ const Product = ({ product }: Props) => {
         </div>
         <div
           ref={divButtonsRef}
-          className='flex gap-4'
+          className='flex gap-4 flex-col md:flex-row'
         >
           <button
             onClick={(e) => checkAction(e)}
             button-attribute='delete'
-            className='bg-red-500 text-[#f2f2f2] font-bold mt-4 self-center py-4 px-8 rounded-2xl transition-all cursor-pointer hover:bg-red-700'
+            className='bg-red-500 text-[#f2f2f2] font-bold mt-4 self-center py-4 px-4 rounded-2xl transition-all cursor-pointer hover:bg-red-700'
           >
             remove
           </button>
@@ -101,7 +101,7 @@ const Product = ({ product }: Props) => {
             onClick={(e) => checkAction(e)}
             button-attribute='update'
             button-used='false'
-            className='bg-slate-500 text-[#f2f2f2] font-bold mt-4 self-center py-4 px-8 rounded-2xl transition-all cursor-pointer hover:bg-slate-700'
+            className='bg-slate-500 text-[#f2f2f2] font-bold mt-4 self-center py-4 px-4 rounded-2xl transition-all cursor-pointer hover:bg-slate-700'
           >
             update
           </button>

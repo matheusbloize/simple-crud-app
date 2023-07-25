@@ -2,7 +2,11 @@ import ProductList from './ProductList';
 import Modal from './Modal';
 import { useRef, useState } from 'react';
 
-const Main = () => {
+interface Props {
+  filteredSearch: string[];
+}
+
+const Main = ({ filteredSearch }: Props) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   const [productName, setProductName] = useState<string | undefined>('');
@@ -13,7 +17,7 @@ const Main = () => {
   const openModal = () => {
     modalRef.current!.style.display = 'block';
   };
-  
+
   const closeModal = () => {
     modalRef.current!.style.display = 'none';
     setProductName('');
@@ -47,7 +51,7 @@ const Main = () => {
         >
           <span>Want to add a product? Click here</span>
         </div>
-        <ProductList />
+        <ProductList filteredSearch={filteredSearch} />
       </main>
     </>
   );
