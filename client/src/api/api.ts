@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { Product, ProductPut } from '../models/ProductModel'
-const API_URL = 'http://localhost:8000/api/products/';
+const API_URL = 'https://simple-crud-app-omip.onrender.com/api/products/';
 
 const getProducts = async (): Promise<Product[]> => {
   const response = await axios.get<Product[]>(`${API_URL}`)
