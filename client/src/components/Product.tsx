@@ -67,7 +67,7 @@ const Product = ({ product }: Props) => {
         setProductImage={setUpdatedProductImage}
         id={product._id}
       />
-      <div className='bg-[#f2f2f2] border-solid border-[#333] border-[1px] rounded-lg  max-w-full min-h-[15em] p-4 flex flex-col items-center justify-center m-4 cursor-pointer overflow-hidden md:w-[15em] 2xl:w-[85%]'>
+      <div className='bg-[#f2f2f2] border-solid border-[#333] border-[1px] rounded-lg  max-w-full min-h-[15em] p-4 flex flex-col items-center justify-center m-4 overflow-hidden md:w-[15em] 2xl:w-[85%]'>
         {product.image ? (
           <img
             className='w-[50vw] h-[25vh] md:w-[25vw] 2xl:w-[12vw] border-solid border-[#fff] border-[5px] rounded-md'
