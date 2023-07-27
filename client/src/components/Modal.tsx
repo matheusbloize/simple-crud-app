@@ -63,7 +63,11 @@ const Modal = ({
 
   const productValidate = (e: MouseEvent<HTMLInputElement>) => {
     e.preventDefault();
-    if (productName!.length >= 3 && productPrice! > 0 && productQuantity! > 0) {
+    if (productName!.length < 3) toast.info('Product name must be 3 characters or more!');
+    if (productName!.length > 16) toast.info('Product name must be 16 characters or less!');
+    if (productPrice! <= 0) toast.info('Product must cost more than $0!');
+    if (productQuantity! <= 0) toast.info('Product must be available in stock!');
+    if (productName!.length >= 3 && productName!.length <= 16 && productPrice! > 0 && productQuantity! > 0) {
       mutate();
     }
   };

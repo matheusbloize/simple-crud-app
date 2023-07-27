@@ -22,7 +22,7 @@ const Header = ({ setSearch }: Props) => {
             type='text'
             placeholder='Search for an item'
             className='rounded-full px-4 py-2 w-full box-border outline-none'
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
           />
         </div>
       </div>
